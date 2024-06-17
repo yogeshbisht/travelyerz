@@ -23,6 +23,11 @@ const config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
+        brand: {
+          DEFAULT: "#c48041",
+          light: "#f9e0c7",
+          dark: "#a16c3f",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
