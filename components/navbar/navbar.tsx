@@ -5,7 +5,7 @@ import NavbarMenu from "./navbar-menu";
 const Navbar = () => {
   return (
     <div className="w-full py-4">
-      <div className="width-container">
+      <div className="max-container">
         <div className="flex flex-row items-center justify-between">
           <BrandLogo />
           <NavbarMenu />

@@ -35,7 +35,7 @@ const SocialIcon = ({
 const Header = () => {
   return (
     <div className="relative bg-brand py-2">
-      <div className="width-container">
+      <div className="max-container">
         <div className="flex items-center justify-between">
           <div className="font-medium">Header content</div>
           <div className="hidden md:flex gap-8">

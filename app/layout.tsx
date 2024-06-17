@@ -13,7 +13,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Tripverve",
+  title: "TripVerve",
   description: "An application for planning trips with friends and family",
 };
 

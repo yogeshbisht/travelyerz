@@ -75,6 +75,6 @@
   }
 }
 
-.width-container {
+.max-container {
   @apply max-w-[1920px] mx-auto xl:px-12 md:px-8 px-4;
 }
