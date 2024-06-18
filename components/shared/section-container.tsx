@@ -1,8 +1,8 @@
+import React from "react";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
 
 interface SectionContainerProps {
-  children: ReactNode;
+  children: React.ReactNode;
   centered?: Boolean;
   bgImage?: string;
   highlight?: string;
@@ -10,17 +10,17 @@ interface SectionContainerProps {
   description?: string;
 }
 
-const SectionContainer: React.FC<SectionContainerProps> = ({
+const SectionContainer = ({
   children,
   centered = false,
   bgImage,
   highlight,
   title,
   description,
-}) => {
+}: SectionContainerProps) => {
   return (
     <section
-      className={cn("relative py-16 -z-10", {
+      className={cn("relative py-16", {
         "bg-transparent": !bgImage,
         "bg-cover bg-center bg-no-repeat min-h-[600px]": !!bgImage,
       })}
@@ -29,9 +29,9 @@ const SectionContainer: React.FC<SectionContainerProps> = ({
       }}
     >
       {bgImage && (
-        <div className="absolute top-0 left-0 h-full w-full bg-black bg-opacity-85 -z-10" />
+        <div className="absolute top-0 left-0 h-full w-full bg-black bg-opacity-85" />
       )}
-      <div className="max-container">
+      <div className="max-container relative z-10">
         <div
           className={`flex flex-col justify-center max-w-lg mb-12 ${
             centered ? "items-center text-center mx-auto" : "items-start"

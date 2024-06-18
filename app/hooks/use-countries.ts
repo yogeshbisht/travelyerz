@@ -9,15 +9,15 @@ const formattedCountries = countries.map((country) => ({
 }));
 
 const useCountries = () => {
-  const getAll = () => formattedCountries;
+  const availableCountries = () => formattedCountries;
 
-  const getByValue = (value: string) => {
+  const countryByValue = (value: string) => {
     return formattedCountries.find((country) => country.value === value);
   };
 
   return {
-    getAll,
-    getByValue,
+    availableCountries,
+    countryByValue,
   };
 };
 

@@ -20,6 +20,8 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import DateRangePicker from "@/components/shared/date-range-picker";
+import { DateTime } from "luxon";
 
 const travelTypeOptions = [
   { value: "city", label: "City Tour" },
@@ -36,8 +38,8 @@ const durationOptions = [
 const HomeHeroValidator = z.object({
   location: z.string(),
   dateRange: z.object({
-    startDate: z.date(),
-    endDate: z.date(),
+    start: z.number(),
+    end: z.number(),
   }),
   travelType: z.string(),
   duration: z.string(),
@@ -46,15 +48,14 @@ const HomeHeroValidator = z.object({
 type HomeHeroValidatorType = z.infer<typeof HomeHeroValidator>;
 
 const HomeHero = () => {
-  const { getAll } = useCountries();
-  const availableCountries = getAll();
+  const { availableCountries } = useCountries();
   const form = useForm<HomeHeroValidatorType>({
     resolver: zodResolver(HomeHeroValidator),
     defaultValues: {
       location: "",
       dateRange: {
-        startDate: new Date(),
-        endDate: new Date(),
+        start: DateTime.now().toUnixInteger(),
+        end: DateTime.now().plus({ days: 1 }).toUnixInteger(),
       },
       travelType: "",
       duration: "",
@@ -68,53 +69,64 @@ const HomeHero = () => {
       title="Explore the world with us"
       description="Book your dream vocation today and get exclusive offers!"
     >
-      <div className="flex justify-center">
-        <div className="flex flex-col gap-6 md:gap-4 mb-8">
-          <Form {...form}>
-            <form>
-              <div className="flex flex-col md:flex-row gap-6">
-                <FormField
-                  control={form.control}
-                  name="location"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Location</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="text-xs sm:text-sm">
-                            <SelectValue placeholder="Select a country" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {availableCountries.map((item) => (
-                            <SelectItem
-                              key={item.value}
-                              value={item.value}
-                              className="text-xs sm:text-sm"
-                            >
-                              <div className="flex flex-row items-center gap-3">
-                                <div>{item.flag}</div>
-                                <div>
-                                  {item.label},
-                                  <span className="text-neutral-500 ml-1">
-                                    {item.region}
-                                  </span>
-                                </div>
+      <div className="p-8">
+        <Form {...form}>
+          <form>
+            <div className="flex flex-col items-center justify-center md:justify-stretch md:flex-row gap-6">
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="text-brand-light">Location</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="h-12">
+                          <SelectValue placeholder="Select a country" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {availableCountries().map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            <div className="flex flex-row items-center gap-3">
+                              <div>{item.flag}</div>
+                              <div>
+                                {item.label},
+                                <span className="text-muted-foreground ml-1">
+                                  {item.region}
+                                </span>
                               </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </form>
-          </Form>
-        </div>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="dateRange"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="text-brand-light">
+                      Date Range
+                    </FormLabel>
+                    <FormControl>
+                      <DateRangePicker
+                        {...field}
+                        onDateRangeSelected={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </form>
+        </Form>
       </div>
     </SectionContainer>
   );
