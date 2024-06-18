@@ -25,9 +25,7 @@ type DateRangePickerProps = {
   onDateRangeSelected: (dateRange: DateRangeParams) => void;
 };
 
-const DateRangePicker: React.FC<DateRangePickerProps> = ({
-  onDateRangeSelected,
-}) => {
+const DateRangePicker = ({ onDateRangeSelected }: DateRangePickerProps) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<DateRange | undefined>(undefined);
 

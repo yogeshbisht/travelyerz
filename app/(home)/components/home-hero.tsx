@@ -23,6 +23,7 @@ import {
 import DateRangePicker from "@/components/shared/date-range-picker";
 import { DateTime } from "luxon";
 import { Button } from "@/components/ui/button";
+import Categories from "./categories";
 
 const travelTypeOptions = [
   { value: "city", label: "City Tour" },
@@ -122,10 +123,7 @@ const HomeHero = () => {
                       Date Range
                     </FormLabel>
                     <FormControl>
-                      <DateRangePicker
-                        {...field}
-                        onDateRangeSelected={field.onChange}
-                      />
+                      <DateRangePicker onDateRangeSelected={field.onChange} />
                     </FormControl>
                   </FormItem>
                 )}
