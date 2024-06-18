@@ -185,7 +185,7 @@ const HomeHero = () => {
                 )}
               />
             </div>
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2">
+            <div className="mt-6">
               <Button
                 className="bg-brand-dark hover:bg-brand font-bold uppercase h-12 w-[400px]"
                 type="submit"
