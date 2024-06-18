@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface SectionContainerProps {
   children: React.ReactNode;
-  centered?: Boolean;
+  centered?: boolean;
   bgImage?: string;
   highlight?: string;
   title?: string;
@@ -19,19 +19,18 @@ const SectionContainer = ({
   description,
 }: SectionContainerProps) => {
   return (
-    <section
-      className={cn("relative py-16", {
-        "bg-transparent": !bgImage,
-        "bg-cover bg-center bg-no-repeat min-h-[600px]": !!bgImage,
-      })}
-      style={{
-        backgroundImage: bgImage ? `url(${bgImage})` : "none",
-      }}
-    >
+    <section className="relative">
       {bgImage && (
-        <div className="absolute top-0 left-0 h-full w-full bg-black bg-opacity-85" />
+        <div
+          className="absolute -z-10 bg-cover bg-center bg-no-repeat h-full w-full top-0 left-0"
+          style={{
+            backgroundImage: bgImage ? `url(${bgImage})` : "none",
+          }}
+        >
+          <div className="absolute h-full w-full bg-black bg-opacity-85" />
+        </div>
       )}
-      <div className="max-container relative z-10">
+      <div className="max-container py-16">
         <div
           className={`flex flex-col justify-center max-w-lg mb-12 ${
             centered ? "items-center text-center mx-auto" : "items-start"

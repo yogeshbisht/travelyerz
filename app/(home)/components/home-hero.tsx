@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import DateRangePicker from "@/components/shared/date-range-picker";
 import { DateTime } from "luxon";
+import { Button } from "@/components/ui/button";
 
 const travelTypeOptions = [
   { value: "city", label: "City Tour" },
@@ -62,8 +63,13 @@ const HomeHero = () => {
     },
   });
 
+  const onSubmit = (data: HomeHeroValidatorType) => {
+    console.log(data);
+  };
+
   return (
     <SectionContainer
+      centered
       bgImage="https://picsum.photos/1920/1080"
       highlight="Plan your trip with ease!"
       title="Explore the world with us"
@@ -71,13 +77,13 @@ const HomeHero = () => {
     >
       <div className="p-8">
         <Form {...form}>
-          <form>
-            <div className="flex flex-col items-center justify-center md:justify-stretch md:flex-row gap-6">
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="location"
                 render={({ field }) => (
-                  <FormItem className="flex-1">
+                  <FormItem>
                     <FormLabel className="text-brand-light">Location</FormLabel>
                     <Select
                       onValueChange={field.onChange}
@@ -124,6 +130,68 @@ const HomeHero = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="travelType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-brand-light">
+                      Travel Type
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="h-12">
+                          <SelectValue placeholder="Select a travel type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {travelTypeOptions.map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="duration"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-brand-light">Duration</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="h-12">
+                          <SelectValue placeholder="Select duration" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {durationOptions.map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2">
+              <Button
+                className="bg-brand-dark hover:bg-brand font-bold uppercase h-12 w-[400px]"
+                type="submit"
+              >
+                Submit
+              </Button>
             </div>
           </form>
         </Form>
