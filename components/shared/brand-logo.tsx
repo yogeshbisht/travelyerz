@@ -10,16 +10,7 @@ const BrandLogo = () => {
     <div className="cursor-pointer">
       <Image
         onClick={() => router.push("/")}
-        className="block dark:hidden"
-        src="/images/logo-dark.svg"
-        height="40"
-        width="160"
-        alt="brand logo"
-      />
-      <Image
-        onClick={() => router.push("/")}
-        className="hidden dark:block"
-        src="/images/logo-light.svg"
+        src="/images/logo.svg"
         height="40"
         width="160"
         alt="brand logo"
